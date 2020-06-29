@@ -20,6 +20,9 @@ job("job-1"){
 
 job("job-2"){
 	label('docker')
+	scm {
+		github('ash6899/jenkins-k8s-automation','master')
+	}
 	triggers {
 		upstream('job-1','SUCCESS')
 	}
