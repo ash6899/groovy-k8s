@@ -11,8 +11,8 @@ job("job-1"){
 
 	steps {
 		shell(''' version=`cat version`
-			sudo docker build -t yash6899/httpd-centos:$version .
-			sudo docker push yash6899/httpd-centos:$version ''')
+			docker build -t yash6899/httpd-centos:$version .
+			docker push yash6899/httpd-centos:$version ''')
 	}
 }
 
