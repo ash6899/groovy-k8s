@@ -1,21 +1,12 @@
 job("job-1"){
 	scm {
-		github('ash6899/jenkins-k8s-automation.git','master')
+		github('ash6899/jenkins-k8s-automation','master')
 	}
-	triggers {
-		urlTrigger {
-            			cron('* 0 * 0 *')
-            			restrictToLabel('new-label')   
-			url('http://192.168.56.101:8888/job/job-1/build?token=new-label') {
-                			proxy(true)
-                			status(404)
-                			timeout(4000)
-                			check('status')
-                			check('etag')
-                			check('lastModified')
-            			}
-        		}
-    	}
+	 triggers {
+    		pollSCM('H/5 * * * *')
+   		 cron('H H * * *')
+ 	 }
+
 	steps {
 		shell(''' version=`cat version`
 			sudo docker build -t yash6899/httpd-centos:$version .
