@@ -39,6 +39,9 @@ job("job-2"){
 
 job("job-3"){
 	label('docker')
+	scm {
+		github('ash6899/jenkins-k8s-automation','master')
+	}
 	triggers {
 		upstream('job-2','SUCCESS')
 	}
@@ -46,7 +49,7 @@ job("job-3"){
 		shell(''' status=$(curl -o /dev/null -s -w "%{http_code}" 192.168.99.101:30022/index.html)
 		if [[ $status == 200 ]]
 		then
-		python 3 pass.py
+		python3 pass.py
 		else
 		python3 fail.py
 		fi ''')
