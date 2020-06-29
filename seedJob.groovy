@@ -3,8 +3,10 @@ job("job-1"){
 		github('ash6899/jenkins-k8s-automation','master')
 	}
 	 triggers {
-    		pollSCM('H/5 * * * *')
-   		 cron('H H * * *')
+    		pollSCM {
+			scmpoll_spec("* * * * *")
+			ignorePostCommitHooks(true)
+		}
  	 }
 
 	steps {
