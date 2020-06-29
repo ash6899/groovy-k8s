@@ -1,4 +1,5 @@
 job("job-1"){
+	label('master')
 	scm {
 		github('ash6899/jenkins-k8s-automation','master')
 	}
