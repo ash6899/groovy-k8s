@@ -12,6 +12,7 @@ job("job-1"){
 	steps {
 		shell(''' version=`cat version`
 			docker build -t yash6899/httpd-centos:$version .
+			docker login -u="yash6899" -p="322018aB"
 			docker push yash6899/httpd-centos:$version ''')
 	}
 }
