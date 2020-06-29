@@ -1,0 +1,17 @@
+FROM centos:7
+RUN yum install git -y
+COPY kubernetes.repo /etc/yum.repos.d/
+RUN yum install kubectl -y
+RUN mkdir /root/k8sconfig
+COPY ca.crt /root/k8sconfig/
+COPY client.crt /root/k8sconfig/
+COPY client.key /root/k8sconfig/
+RUN mkdir /root/.kube
+COPY config /root/.kube/
+RUN yum install openssh-server -y
+RUN yum install openssh-client -y
+RUN echo root:pass | chpasswd
+RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+RUN ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519
+EXPOSE 22
+CMD [ "/usr/sbin/sshd ","-D" ][
