@@ -23,7 +23,7 @@ job("job-1"){
 	}
 }
 
-job("job-2){
+job("job-2"){
 	label('docker')
 	triggers {
 		upstream('job-1','SUCCESS')
@@ -39,7 +39,7 @@ job("job-2){
 	}
 }
 
-job("job-3){
+job("job-3"){
 	label('docker')
 	triggers {
 		upstream('job-2','SUCCESS')
